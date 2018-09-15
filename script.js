@@ -15,9 +15,18 @@ $(document).ready(function() {
 function querySuccess1(obj) {
   
   console.log(obj);
-  let ks = Object.keys(obj);
+  let fks = Object.keys(obj["features"]);
+  let fObj = obj["features"];
 
-  for (let i = 0; i < ks.length; ++i) {
-    console.log(ks[i], typeof obj[ks[i]] == "object" ? obj[ks[i]] : 0);
+  for (let i = 0; i < fks.length; ++i) {
+    console.log(fObj[fks[i]]);
   }
+
+  let html = "";
+
+  for (let i = 0; i < fks.length; ++i) {
+    html += "<p><strong>Title: </strong>" + fObj[fks[i]]["properties"]["title"] + "</p>";
+  }
+
+  document.getElementById("content").innerHTML = html;
 }
