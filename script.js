@@ -25,7 +25,8 @@ function querySuccess1(obj) {
   let html = "";
 
   for (let i = 0; i < fks.length; ++i) {
-    html += "<p><strong>Title: </strong>" + fObj[fks[i]]["properties"]["title"] + "</p>";
+    html += "<p><strong>Title: </strong>" + fObj[fks[i]]["properties"]["title"] + "<br/>";
+    html += "<strong>Tsunami #: </strong>" + fObj[fks[i]]["properties"]["tsunami"] + "</p>";
   }
 
   document.getElementById("content").innerHTML = html;
