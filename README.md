@@ -1,2 +1,9 @@
-This will be an earthquake app that informs the users of recent earthquakes. Hopefully they will eventually be able to input
-their location and recent earthquakes near them would show up. 
+Earthquake Info Hub App
+=======================
+I want this app to be able to provide information about recent earthquakes, earthquakes near the user, and information by request for earthquakes.
+
+Design Ideas
+------------
+The landing page should have recent significant earthquakes on it and should have navigation to other methods of information. I'll provide the information that is sent back after a request, so that a designer can use the information to better think about how it might be best to display it.
+
+### JSON info sent back here
