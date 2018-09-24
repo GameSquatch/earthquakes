@@ -6,8 +6,10 @@ Design Ideas
 ------------
 The landing page should have recent significant earthquakes on it and should have navigation to other methods of information. I'll provide the information that is sent back after a request, so that a designer can use the information to better think about how it might be best to display it.
 
-I kinda want each earthquake 'card' to look like [this](https://codepen.io/CodeSquatch/pen/gdyjZx), but better for responsive design,  
-of course.
+I kinda want each earthquake 'card' to look like the picture below. Click it to go to the Codepen page for the design.
+
+Here is the picture:  
+<a href="https://codepen.io/CodeSquatch/pen/gdyjZx" target="_blank"><img src="https://www.dropbox.com/s/94rdgheyb35nv2s/GitHub-earthquakes1.png?raw=1" width="600"></a>
 
 ### JSON info sent back
 
