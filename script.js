@@ -25,7 +25,11 @@ function querySuccess1(obj) {
 	let html = "";
 
 	for (let i = 0; i < fks.length; ++i) {
-		html += "<p><strong>Title: </strong>" + fObj[fks[i]]["properties"]["title"] + "<br/>";
+		let d = new Date(parseInt(fObj[fks[i]]["properties"]["time"]));
+
+		html += "<p><strong>Magnitude: </strong>" + fObj[fks[i]]["properties"]["mag"] + "<br/>";
+		html += "<strong>Place: </strong>" + fObj[fks[i]]["properties"]["place"] + "<br/>";
+		html += "<strong>Date: </strong>" + d + "<br/>";
 		// html += "<strong>Tsunami #: </strong>" + fObj[fks[i]]["properties"]["tsunami"] + "</p>";
 	}
 
