@@ -11,6 +11,10 @@ I kinda want each earthquake 'card' to look like the picture below. Click it to 
 Here is the picture:  
 <a href="https://codepen.io/CodeSquatch/pen/gdyjZx" target="_blank"><img src="https://www.dropbox.com/s/94rdgheyb35nv2s/GitHub-earthquakes1.png?raw=1" width="600"></a>
 
+I think each earthquake 'card' should have a button in it that will display more details about that earthquake besides  
+the magnitude, time, and place. For example, the json object returns info like a tsunami number, a status, another json  
+object with MORE details, magnitude type, and coordinates (which I am not sure what they are for).
+
 ### JSON info sent back
 
 The USGS site that has the JSON format and info is <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php" target="_blank">here</a>.
