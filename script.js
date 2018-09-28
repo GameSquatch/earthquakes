@@ -8,14 +8,14 @@ $(document).ready(function () {
 		type: "GET",				// it's getting information
 		url: baseURL + queryURL,	// combining the url's to make a valid url
 		dataType: "json",			// it's requesting info in json format
-		success: querySuccess1		// this is the callback function used when the request is successful
+		success: getEvents		// this is the callback function used when the request is successful
 	});
 
 });
 
 // our function used for the success of the api request. The information returned from the request is
 // used as an argument for the callback function. Since we requested json, it's a json object.
-function querySuccess1(obj) {
+function getEvents(obj) {
 
 	// logging the object to the console, so you can see what it's comprised of
 	console.log(obj);
@@ -50,4 +50,20 @@ function querySuccess1(obj) {
 
 	// now we put the html inside of a pre-existing html element with the id #content
 	document.getElementById("content").innerHTML = html;
+
+	// get the url for more details about the first earthquake event
+	let detURL = fObj[fks[0]]["properties"]["detail"];
+
+	// now use the detURL to make another api request
+	$.ajax({
+		type: "GET",				// it's getting information
+		url: detURL,	// combining the url's to make a valid url
+		dataType: "json",			// it's requesting info in json format
+		success: getEventDets		// this is the callback function used when the request is successful
+	});
+}
+
+function getEventDets(obj) {
+	// just logging it to the console for now :)
+	console.log(obj);
 }
