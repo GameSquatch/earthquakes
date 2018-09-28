@@ -15,6 +15,11 @@ Here is the picture:
 
 The USGS site that has the JSON format and info is <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php" target="_blank">here</a>.
 
+### TODO tasks for contributors
+1.  I think the most important right now is visual design.
+2.  Next will be traversing a json object
+3.  Lastly is just ideas for features. You can add them into the README here
+
 Git Instructions (Mac)
 ----------------------
 1.  Fork this repository to your own by clicking Fork on this page
@@ -59,7 +64,7 @@ Git Instructions (Mac)
     
     This will make a pull-request that I can review.
     
-#### For PC, download [Git Bash](https://gitforwindows.org/)
+#### For PC, download <a href="https://gitforwindows.org/" target="_blank">Git Bash</a>
 The commands will be the same for Git Bash as they are here.
     
     
