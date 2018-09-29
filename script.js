@@ -2,6 +2,7 @@ let baseURL = "https://earthquake.usgs.gov/fdsnws/event/1";
 let queryURL = "/query?format=geojson&minmagnitude=3&limit=50&includeallmagnitudes";
 
 $(document).ready(function () {
+
 	// request to the api for information using the base url above plus the query url.
 	// the query contains what is being requested. In this case it's 50 earthquakes with a minimum mag of 3
 	$.ajax({
@@ -43,9 +44,12 @@ function getEvents(obj) {
 
 		// add to the html. each earthquake is a paragraph tag. It's retrieving magnitude, and place, then
 		// puts the date we got above into the html.
-		html += "<p><strong>Magnitude: </strong>" + fObj[fks[i]]["properties"]["mag"] + "<br/>";
+		html += "<p>";
+		html += "<strong>Magnitude: </strong>" + fObj[fks[i]]["properties"]["mag"] + "<br/>";
 		html += "<strong>Place: </strong>" + fObj[fks[i]]["properties"]["place"] + "<br/>";
-		html += "<strong>Date: </strong>" + d + "</p>";
+		html += "<strong>Date: </strong>" + d;
+		html += "<div><button type='button'>Details</button></div>";
+		html += "</p>";
 	}
 
 	// now we put the html inside of a pre-existing html element with the id #content
