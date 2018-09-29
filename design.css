@@ -1,58 +1,10 @@
-body {
+body, html {
   margin: 0;
-  padding: 0;
+  height: 100%;
 }
 
 .container {
   width: 80%;
   margin: auto;
   padding: 0;
-}
-
-.card {
-  margin-top: 15px;
-  position: relative;
-  border: 2px solid lightgray;
-  border-radius: 10px;
-  max-width: 600px;
-}
-
-.cardHeader {
-  border-radius: 9px 9px 0 0;
-  width: 100%;
-  font-size: 14pt;
-  background-color: lightgray;
-}
-
-.cardContent {
-  position: relative;
-  width: 100%;
-}
-
-.cardMag {
-  display: inline-block;
-  width: auto;
-  font-size: 28pt;
-  color: red;
-  border: 2px solid lightskyblue;
-  border-radius: 50%;
-  padding: 10px;
-  margin-left: 10px;
-}
-
-.cardDetails {
-  position: absolute;
-  display: inline-block;
-  right: 0;
-  top: 5px;
-  width: 65%;
-  background-color: lightgreen;
-}
-
-.cardLocation {
-  width: 100%;
-}
-
-.cardButton {
-  width: 100%;
 }
