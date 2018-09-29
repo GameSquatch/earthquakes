@@ -76,6 +76,8 @@ function getEventDets(obj) {
 	console.log(obj);
 }
 
+// this is the function that the buttons use. When the buttons were created, each one was given a unique argument,
+// so this will get the details from the array using that unique index. The details array was created using the same index.
 function showDets(i) {
 	$("#content").html("<p>" + dets[i] + "</p>");
 }
