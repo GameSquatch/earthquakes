@@ -3,8 +3,17 @@ body, html {
   height: 100%;
 }
 
+body {
+  display: grid;
+  grid-template-columns: [start] 1fr [middle] 1fr [end];
+}
+
 .container {
-  width: 80%;
-  margin: auto;
-  padding: 0;
+  grid-column: [start] / [middle];
+  padding: 5px;
+}
+
+.content {
+  grid-column: [middle] / [end];
+  padding: 5px;
 }

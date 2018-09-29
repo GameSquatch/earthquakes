@@ -1,8 +1,9 @@
 let baseURL = "https://earthquake.usgs.gov/fdsnws/event/1";
 let queryURL = "/query?format=geojson&minmagnitude=3&limit=50&includeallmagnitudes";
+let dets;
 
 $(document).ready(function () {
-
+	dets = [];
 	// request to the api for information using the base url above plus the query url.
 	// the query contains what is being requested. In this case it's 50 earthquakes with a minimum mag of 3
 	$.ajax({
@@ -48,12 +49,15 @@ function getEvents(obj) {
 		html += "<strong>Magnitude: </strong>" + fObj[fks[i]]["properties"]["mag"] + "<br/>";
 		html += "<strong>Place: </strong>" + fObj[fks[i]]["properties"]["place"] + "<br/>";
 		html += "<strong>Date: </strong>" + d;
-		html += "<div><button type='button'>Details</button></div>";
+		html += "<div><button type='button' onclick='showDets(" + i + ")'>Details</button></div>";
 		html += "</p>";
+
+		// push the details url into the array declared in the ready function above
+		dets.push(fObj[fks[i]]["properties"]["detail"]);
 	}
 
 	// now we put the html inside of a pre-existing html element with the id #content
-	document.getElementById("content").innerHTML = html;
+	$("#events").html(html);
 
 	// get the url for more details about the first earthquake event
 	let detURL = fObj[fks[0]]["properties"]["detail"];
@@ -70,4 +74,8 @@ function getEvents(obj) {
 function getEventDets(obj) {
 	// just logging it to the console for now :)
 	console.log(obj);
+}
+
+function showDets(i) {
+	$("#content").html("<p>" + dets[i] + "</p>");
 }
