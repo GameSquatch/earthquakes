@@ -3,19 +3,8 @@ body, html {
   height: 100%;
 }
 
-body {
-  display: grid;
-  grid-template-columns: [start] 1fr [middle] 1fr [end];
-}
-
-.container {
-  grid-column: [start] / [middle];
-  padding: 5px;
-}
-
-.content {
-  grid-column: [middle] / [end];
-  padding: 5px;
+* {
+	box-sizing: border-box;
 }
 
 /*
@@ -25,7 +14,8 @@ body {
 
 .eventsContainer {
 	display: grid;
-	justify-items: center;
+  justify-items: center;
+  grid-gap: 15px 0;
 }
 
 .cardContainer {
