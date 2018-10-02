@@ -1,5 +1,5 @@
 let baseURL = "https://earthquake.usgs.gov/fdsnws/event/1";
-let queryURL = "/query?format=geojson&minmagnitude=3&limit=50&includeallmagnitudes";
+let queryURL = "/query?format=geojson&minmagnitude=4.5&limit=50&includeallmagnitudes";
 let dets;
 
 $(document).ready(function () {
@@ -45,27 +45,6 @@ function getEvents(obj) {
 
 		// add to the html. each earthquake is a paragraph tag. It's retrieving magnitude, and place, then
 		// puts the date we got above into the html.
-		/*
-		// This is what the javascript needs to create in order to use the design. Of course, the fetched data will fill in the contents.
-		<div class="cardContainer">
-		
-			<div class="magBox">
-				<div class="cardMag"><span>5.9</span></div>
-			</div>
-			
-			<div class="cardPlace">
-				<div class="where">Where</div>
-				<div class="whereContent">5 km SSW of Butt, CA</div>
-			</div>
-			
-			<div class="cardDate">
-				<div class="when">When</div>
-				<div class="whenContent">September 9, 2018</div>
-			</div>
-			
-		</div>
-
-		*/
 		html += "<div class='cardContainer'>";
 		html += "<div class='magBox'>";
 		html += "<div class='cardMag'><span>" + fObj[fks[i]]["properties"]["mag"] + "</span></div>";
@@ -76,18 +55,9 @@ function getEvents(obj) {
 		html += "</div>";
 		html += "<div class='cardDate'>";
 		html += "<div class='when'>When</div>";
-		html += "<div class='whenContent'>" + d + "</div>";
+		html += "<div class='whenContent'>" + d.toUTCString() + "</div>";
 		html += "</div>";
 		html += "</div>";
-
-		/*
-		html += "<p>";
-		html += "<strong>Magnitude: </strong>" + fObj[fks[i]]["properties"]["mag"] + "<br/>";
-		html += "<strong>Place: </strong>" + fObj[fks[i]]["properties"]["place"] + "<br/>";
-		html += "<strong>Date: </strong>" + d;
-		html += "<div><button type='button' onclick='showDets(" + i + ")'>Details</button></div>";
-		html += "</p>";
-		*/
 
 		// push the details url into the array declared in the ready function above
 		dets.push(fObj[fks[i]]["properties"]["detail"]);
