@@ -17,3 +17,55 @@ body {
   grid-column: [middle] / [end];
   padding: 5px;
 }
+
+/*
+* Below is opied css from code pen. It needs to be implemented into this code for design.
+* Its design is mobile-first, so it will work for mobile before it will look its best for larger devices.
+*/
+
+.eventsContainer {
+	display: grid;
+	justify-items: center;
+}
+
+.cardContainer {
+	display: grid;
+	justify-items: center;
+	width: 350px;
+	background: #c7d2e5;
+	padding: 20px;
+	grid-gap: 12px 0;
+	border-radius: 10px 10px;
+}
+.magBox {
+	padding: 20px;
+	background: #a1a8b5;
+	border-radius: 8px 8px;
+	box-shadow: 0 11px 7px -6px rgba(0, 0, 0, 0.23);
+}
+.cardMag {
+	display: grid;
+	place-items: center;
+	width: 80px;
+	height: 80px;
+	font-size: 16pt;
+	background: #89b6ff;
+	border-radius: 50%;
+	box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.15), inset 4px 0 5px 0 rgba(255, 255, 255, 0.18);
+}
+
+.cardPlace, .cardDate {
+	display: grid;
+	justify-items: center;
+	background: #394966;
+	color: white;
+	padding: 10px;
+	width: 100%;
+}
+.where, .when {
+	font-size: 14pt;
+}
+.whereContent, .whenContent {
+	background: #566f9e;
+	padding: 8px;
+}

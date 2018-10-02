@@ -30,9 +30,9 @@ function getEvents(obj) {
 	// to display info from a json, you use the keys to get that info, so fks[i] is a key of fObj
 	// fObj[key] is the value (or info) in that key, value pair.
 	// In this case, the values are json objects of each earthquake. Logging them to the console.
-	for (let i = 0; i < fks.length; ++i) {
+	/*for (let i = 0; i < fks.length; ++i) {
 		console.log(fObj[fks[i]]);
-	}
+	}*/
 
 	// the html doesn't need to be created with the javascript, but it's easier for me. Someone should convince me
 	// of some other way that makes more sense. Here, we start with blank
@@ -63,12 +63,7 @@ function getEvents(obj) {
 	let detURL = fObj[fks[0]]["properties"]["detail"];
 
 	// now use the detURL to make another api request
-	$.ajax({
-		type: "GET",				// it's getting information
-		url: detURL,	// combining the url's to make a valid url
-		dataType: "json",			// it's requesting info in json format
-		success: getEventDets		// this is the callback function used when the request is successful
-	});
+	
 }
 
 function getEventDets(obj) {
@@ -79,5 +74,13 @@ function getEventDets(obj) {
 // this is the function that the buttons use. When the buttons were created, each one was given a unique argument,
 // so this will get the details from the array using that unique index. The details array was created using the same index.
 function showDets(i) {
+	let u = dets[i];
+	$.ajax({
+		type: "GET",				// it's getting information
+		url: u,				// combining the url's to make a valid url
+		dataType: "json",			// it's requesting info in json format
+		success: getEventDets		// this is the callback function used when the request is successful
+	});
+
 	$("#content").html("<p>" + dets[i] + "</p>");
 }
