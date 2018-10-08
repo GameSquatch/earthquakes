@@ -5,21 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Earthquakes</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
     <link rel="stylesheet" href="design.css">
     <script src="script.js"></script>
 </head>
 <body>
 
+    <div id="topHeader">
+        <div class="headerIcon"><span class="fab fa-twitter"></span></div>
+        <div class="headerIcon"><span class="fab fa-instagram"></span></div>
+        <div class="headerIcon"><span class="fab fa-codepen"></span></div>
+        <div class="headerIcon"><span class="fab fa-github"></span></div>
+        <div id="searchIcon"></div>
+    </div>
+    <div id="header">
+        <div id="title">EARTHQUAKE APP</div>
+    </div>
+    <div id="tabs">
+        <div class="headerTab currentTab">Home</div>
+        <div class="headerTab">Timeline</div>
+        <div class="headerTab">Visual Map</div>
+        <div class="headerTab">About</div>
+    </div>
+    
     <div id="events" class="eventsContainer">
-
+        
+        <div class="cardContainer">
+            <div class="bg"></div>
+            <div class="magnitude"><span>5.8</span></div>
+            
+            <div class="where"><span>5 km SSW of Chingasa, Colombia</span></div>
+            
+            <div class="when"><span>Wednesday October 03, 2018</span></div>
+            <button class="btn" type="button">Details</button>
+        </div>
+        
+        <div class="cardContainer">
+            <div class="bg"></div>
+            <div class="magnitude"><span>4.1</span></div>
+            
+            <div class="where"><span>55 km NNW of Anchorage, Alaska</span></div>
+            
+            <div class="when"><span>Wednesday October 03, 2018</span></div>
+            <button class="btn" type="button">Details</button>
+        </div>
+        
     </div>
-    <!--
-    <div id="content" class="content">
-
-    </div>
-    -->
+    
 </body>
 </html>
