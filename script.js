@@ -2,13 +2,33 @@ let baseURL = "https://earthquake.usgs.gov/fdsnws/event/1";
 let queryURL = "/query?format=geojson&minmagnitude=4.5&limit=15&includeallmagnitudes";
 let dets;
 let tabs;
+let screenH;
 
 $(document).ready(function () {
+	// the detail url for each earthquake event
 	dets = [];
+
+	// The modal should be the screen's height, so it's set to that here
+	screenH = window.innerHeight;
+	$("#searchModal").css("height", screenH + "px");
+
+	// Selecting tab, adding class
 	$("#tabs").children().click((event) => {
 		$("#tabs").children().removeClass("currentTab");
 		$(event.target).addClass("currentTab");
-	})
+	});
+
+	// display search modal page
+	$("#searchIcon").click(event => {
+		$("#searchModal").css("display", "block");
+		$("body").css("overflow", "hidden");
+	});
+
+	// hide the modal search page when exiting
+	$("#modalExit").click(event => {
+		$("#searchModal").css("display", "none");
+		$("body").css("overflow", "visible");
+	});
 	// request to the api for information using the base url above plus the query url.
 	// the query contains what is being requested. In this case it's 50 earthquakes with a minimum mag of 3
 	$.ajax({
@@ -54,7 +74,7 @@ function getEvents(obj) {
 		html += "<div class='bg'></div>";
 		html += "<div class='magnitude'><span>" + fObj[fks[i]]["properties"]["mag"] + "</span></div>";
 		html += "<div class='where'><span>" + fObj[fks[i]]["properties"]["place"] + "</span></div>";
-		html += "<div class='when'><span>" + d + "</span></div>";
+		html += "<div class='when'><span>" + d.toUTCString() + "</span></div>";
 		html += "<button class='btn' type='button' onclick='showDets(" + i + ")'>Details</button>";
 		html += "</div>";
 
@@ -81,6 +101,7 @@ function getEventDets(obj) {
 // so this will get the details from the array using that unique index. The details array was created using the same index.
 function showDets(i) {
 	let u = dets[i];
+
 	$.ajax({
 		type: "GET",				// it's getting information
 		url: u,				// combining the url's to make a valid url

@@ -5,10 +5,29 @@
 html, body {
 	margin: 0;
 }
+body {
+	position: relative;
+}
 
 * {
 	box-sizing: border-box;
 	font-family: 'Ubuntu', sans-serif;
+}
+
+#searchModal {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	background: rgba(0, 0, 0, 0.65);
+	color: white;
+	display: none;
+}
+#modalExit {
+	display: inline-block;
+	color: white;
+	font-size: 20pt;
 }
 
 #topHeader, #header, #tabs {
@@ -48,11 +67,20 @@ html, body {
 }
 .headerIcon:hover {
 	background: #444;
+	cursor: pointer;
 }
 #searchIcon {
+	display: grid;
+	place-items: center;
 	grid-column: 6 / 7;
-	background: blue;
+	color: white;
+	font-size: 20pt;
 }
+#searchIcon:hover {
+	background: #555;
+	cursor: pointer;
+}
+
 #title {
 	text-align: center;
 	grid-column: 1 / 2;
@@ -153,4 +181,8 @@ html, body {
 	border: none;
 	border-radius: 10px;
 	box-shadow: 0 10px 5px rgba(0, 0, 0, 0.3);
+}
+.btn:hover {
+	background: #2590ec;
+	cursor: pointer;
 }
