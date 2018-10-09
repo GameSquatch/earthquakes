@@ -1,9 +1,14 @@
 let baseURL = "https://earthquake.usgs.gov/fdsnws/event/1";
-let queryURL = "/query?format=geojson&minmagnitude=4.5&limit=50&includeallmagnitudes";
+let queryURL = "/query?format=geojson&minmagnitude=4.5&limit=15&includeallmagnitudes";
 let dets;
+let tabs;
 
 $(document).ready(function () {
 	dets = [];
+	$("#tabs").children().click((event) => {
+		$("#tabs").children().removeClass("currentTab");
+		$(event.target).addClass("currentTab");
+	})
 	// request to the api for information using the base url above plus the query url.
 	// the query contains what is being requested. In this case it's 50 earthquakes with a minimum mag of 3
 	$.ajax({
@@ -46,17 +51,11 @@ function getEvents(obj) {
 		// add to the html. each earthquake is a paragraph tag. It's retrieving magnitude, and place, then
 		// puts the date we got above into the html.
 		html += "<div class='cardContainer'>";
-		html += "<div class='magBox'>";
-		html += "<div class='cardMag'><span>" + fObj[fks[i]]["properties"]["mag"] + "</span></div>";
-		html += "</div>";
-		html += "<div class='cardPlace'>";
-		html += "<div class='where'>Where</div>";
-		html += "<div class='whereContent'>" + fObj[fks[i]]["properties"]["place"] + "</div>";
-		html += "</div>";
-		html += "<div class='cardDate'>";
-		html += "<div class='when'>When</div>";
-		html += "<div class='whenContent'>" + d.toUTCString() + "</div>";
-		html += "</div>";
+		html += "<div class='bg'></div>";
+		html += "<div class='magnitude'><span>" + fObj[fks[i]]["properties"]["mag"] + "</span></div>";
+		html += "<div class='where'><span>" + fObj[fks[i]]["properties"]["place"] + "</span></div>";
+		html += "<div class='when'><span>" + d + "</span></div>";
+		html += "<button class='btn' type='button' onclick='showDets(" + i + ")'>Details</button>";
 		html += "</div>";
 
 		// push the details url into the array declared in the ready function above
