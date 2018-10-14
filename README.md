@@ -4,12 +4,15 @@ I want this app to be able to provide information about recent earthquakes, eart
 
 Design Ideas
 ------------
-The landing page should have recent significant earthquakes on it and should have navigation to other methods of information. I'll provide the information that is sent back after a request, so that a designer can use the information to better think about how it might be best to display it.
+<strike>The landing page should have recent significant earthquakes on it and should have navigation to other methods of information.</strike>
+I just used a mobile-first design for now. Maybe later for responsive the nav and misc. things can be added.
+I'll provide the information that is sent back after a request, so that a designer can use the information to better think
+about how it might be best to display it.
 
 I kinda want each earthquake 'card' to look like the picture below. Click it to go to the Codepen page for the design.
 
 Here is the picture:  
-<a href="https://codepen.io/CodeSquatch/pen/gdyjZx" target="_blank"><img src="https://www.dropbox.com/s/94rdgheyb35nv2s/GitHub-earthquakes1.png?raw=1" width="600"></a>
+<a href="https://codepen.io/CodeSquatch/pen/zmBZgB" target="_blank"><img src="https://www.dropbox.com/s/94rdgheyb35nv2s/GitHub-earthquakes1.png?raw=1" width="600"></a>
 
 I think each earthquake 'card' should have a button in it that will display more details about that earthquake besides  
 the magnitude, time, and place. For example, the json object returns info like a tsunami number, a status, another json  
@@ -23,6 +26,7 @@ The USGS site that has the JSON format and info is <a href="https://earthquake.u
 1.  I think the most important right now is visual design.
 2.  Next will be traversing a json object
 3.  Lastly is just ideas for features. You can add them into the README here
+4.  Making a search feature to allow users to refine their results to certain earthquakes.
 
 Git Instructions (Mac)
 ----------------------
