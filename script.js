@@ -29,6 +29,7 @@ $(document).ready(function () {
 		$("#searchModal").css("display", "none");
 		$("body").css("overflow", "visible");
 	});
+	
 	// request to the api for information using the base url above plus the query url.
 	// the query contains what is being requested. In this case it's 50 earthquakes with a minimum mag of 3
 	$.ajax({
