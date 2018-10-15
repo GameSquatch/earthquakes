@@ -13,23 +13,71 @@ body {
 	box-sizing: border-box;
 	font-family: 'Ubuntu', sans-serif;
 }
-
-#searchModal {
+/* *****************************
+*  MODAL DESIGN ****************
+*/
+#modalContainer {
 	position: absolute;
-	width: 100%;
 	top: 0;
 	left: 0;
 	z-index: 2;
-	background: rgba(0, 0, 0, 0.65);
-	color: white;
+	width: 100%;
 	display: none;
+	background: rgba(0, 0, 0, 0.65);
+	overflow-y: auto;
+}
+#searchModal {
+	display: grid;
+	width: calc(100% - 20px);
+	max-width: 650px;
+	margin: auto;
+	grid-template-columns: 1fr;
+	justify-items: center;
+	grid-gap: 18px;
+	margin-top: 15px;
+	color: white;
 }
 #modalExit {
+	position: sticky;
+	top: 0;
 	display: inline-block;
 	color: white;
 	font-size: 20pt;
 }
+fieldset {
+	width: 100%;
+}
+legend {
+	font-size: 15pt;
+}
+.inputSpacer {
+	height: 20px;
+}
+.inputDescription {
+	margin: 5px 0 0 5px;
+}
+input {
+	width: 100%;
+	padding: 8px 5px;
+	background: #DDD;
+}
+select {
+	width: 100%;
+	height: 30px;
+	background: #DDD;
+}
+button.search {
+	background: #DDD;
+	padding: 15px;
+}
+/*
+*  END MODAL DESIGN ************
+********************************/
 
+
+/* *****************************
+*  HEADER DESIGN ***************
+*/
 #topHeader, #header, #tabs {
 	margin: 0;
 	background: #000;
@@ -69,6 +117,11 @@ body {
 	background: #444;
 	cursor: pointer;
 }
+a:link, a:visited, a:active {
+	text-decoration: none;
+	color: white;
+}
+
 #searchIcon {
 	display: grid;
 	place-items: center;
@@ -91,11 +144,9 @@ body {
 	padding: 15px 0 0;
 	height: 100%;
 	text-align: center;
-	transition: font-size 0.5s ease;
 }
 .headerTab:hover {
 	cursor: pointer;
-	font-size: 14pt;
 }
 .currentTab {
 	background: white;
@@ -104,7 +155,14 @@ body {
 	border-radius: 10px 10px 0 0;
 	color: #000;
 }
+/*
+*  END HEADER DESIGN ***********
+********************************/
 
+
+/* *****************************
+*  CONTENT DESIGN **************
+*/
 .eventsContainer {
 	margin-top: 20px;
 	display: grid;
@@ -186,3 +244,6 @@ body {
 	background: #2590ec;
 	cursor: pointer;
 }
+/*
+*  END CONTENT DESIGN **********
+********************************/

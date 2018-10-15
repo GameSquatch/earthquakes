@@ -14,16 +14,55 @@
 </head>
 <body>
 
-    <div id="searchModal">
-        <div id="modalExit">X</div>
-        <p>There will be search stuff in here to refine the searching criteria for certain earthquakes.</p>
+    <div id="modalContainer">
+        <div id="searchModal">
+            <div id="modalExit">X</div>
+            <fieldset>
+                <legend>Location</legend>
+                <div class="inputName">Latitude</div>
+                <input id="lat" type="number" placeholder="70.04">
+                <div class="inputDescription">Latitude ranges from -90 to 90 degrees.</div>
+                <div class="inputSpacer"></div>
+                <div class="inputName">Longitude</div>
+                <input id="long" type="number" placeholder="100.05">
+                <div class="inputDescription">Longitude ranges from -180 degrees to 180 degrees.</div>
+                <div class="inputSpacer"></div>
+                <div class="inputName">Radius</div>
+                <input id="rad" type="number" placeholder="150">
+                <div class="inputDescription">Radius is the distance from the latitude-longitude point defined above. So 50 will cover an area of a circle with a radius of 50km.</div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Date</legend>
+                <div class="inputName">Start Date</div>
+                <input type="date">
+                <div class="inputSpacer"></div>
+                <div class="inputName">End Date</div>
+                <input type="date">
+            </fieldset>
+            
+            <fieldset>
+                <legend>Sort By</legend>
+                <div class="inputName">Select One</div>
+                <select id="orderby">
+                    <option value="time" selected>Time Descending</option>
+                    <option value="time-asc">Time Ascending</option>
+                    <option value="magnitude">Magnitude Descending</option>
+                    <option value="magnitude-asc">Magnitude Ascending</option>
+                </select>
+                <div class="inputDescription">The results of the search will sort by this parameter.</div>
+            </fieldset>
+            
+            <button class="search" type="button" onclick="search()">Search</button>
+            
+        </div>
     </div>
 
     <div id="topHeader">
         <div class="headerIcon"><a class="fab fa-twitter"></a></div>
         <div class="headerIcon"><a class="fab fa-instagram"></a></div>
-        <div class="headerIcon"><a class="fab fa-codepen"></a></div>
-        <div class="headerIcon"><a class="fab fa-github"></a></div>
+        <div class="headerIcon"><a class="fab fa-codepen" href="https://codepen.io/CodeSquatch/" target="_blank"></a></div>
+        <div class="headerIcon"><a class="fab fa-github" href="https://github.com/GameSquatch" target="_blank"></a></div>
         <div id="searchIcon"><a class="fas fa-search"></a></div>
     </div>
     <div id="header">
@@ -37,26 +76,8 @@
     </div>
     
     <div id="events" class="eventsContainer">
+
         
-        <div class="cardContainer">
-            <div class="bg"></div>
-            <div class="magnitude"><span>5.8</span></div>
-            
-            <div class="where"><span>5 km SSW of Chingasa, Colombia</span></div>
-            
-            <div class="when"><span>Wednesday October 03, 2018</span></div>
-            <button class="btn" type="button">Details</button>
-        </div>
-        
-        <div class="cardContainer">
-            <div class="bg"></div>
-            <div class="magnitude"><span>4.1</span></div>
-            
-            <div class="where"><span>55 km NNW of Anchorage, Alaska</span></div>
-            
-            <div class="when"><span>Wednesday October 03, 2018</span></div>
-            <button class="btn" type="button">Details</button>
-        </div>
         
     </div>
     

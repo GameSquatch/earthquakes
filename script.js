@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 	// The modal should be the screen's height, so it's set to that here
 	screenH = window.innerHeight;
-	$("#searchModal").css("height", screenH + "px");
+	$("#modalContainer").css("height", screenH + "px");
 
 	// Selecting tab, adding class
 	$("#tabs").children().click((event) => {
@@ -20,13 +20,16 @@ $(document).ready(function () {
 
 	// display search modal page
 	$("#searchIcon").click(event => {
-		$("#searchModal").css("display", "block");
+		screenH = window.innerHeight;
+		$("#modalContainer").css("height", screenH + "px");
+
+		$("#modalContainer").css("display", "block");
 		$("body").css("overflow", "hidden");
 	});
 
 	// hide the modal search page when exiting
 	$("#modalExit").click(event => {
-		$("#searchModal").css("display", "none");
+		$("#modalContainer").css("display", "none");
 		$("body").css("overflow", "visible");
 	});
 	
