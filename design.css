@@ -169,7 +169,7 @@ a:link, a:visited, a:active {
 /* *****************************
 *  CONTENT DESIGN **************
 */
-.eventsContainer {
+.contentContainer {
 	margin-top: 20px;
 	display: grid;
 	width: 100%;

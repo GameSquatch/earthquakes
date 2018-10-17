@@ -2,11 +2,26 @@ let baseURL = "https://earthquake.usgs.gov/fdsnws/event/1";
 let queryURL = "/query?format=geojson&minmagnitude=4.5&limit=15&includeallmagnitudes";
 let dets;
 let tabs;
+let currentTab;
+let content;
 let screenH;
 
 $(document).ready(function () {
 	// the detail url for each earthquake event
 	dets = [];
+
+	// this object will contain the tab content. Instead of loading a whole new page, I am just going to create the html
+	// needed for each tab. This is for a very specific reason. The website www.sololearn.com can't use multiple pages,
+	// and that's where I post a lot of my projects.
+	tabs = {
+		"Home": "",
+		"Timeline": "",
+		"Visual Map": "",
+		"About": ""
+	};
+	currentTab = "Home";
+
+	content = $("#content");
 
 	// The modal should be the screen's height, so it's set to that here
 	screenH = window.innerHeight;
@@ -16,10 +31,12 @@ $(document).ready(function () {
 	$("#tabs").children().click((event) => {
 		$("#tabs").children().removeClass("currentTab");
 		$(event.target).addClass("currentTab");
+		currentTab = event.target.innerHTML;
+		changeContent(currentTab);
 	});
 
 	// display search modal page
-	$("#searchIcon").click(event => {
+	$("#searchIcon").click(() => {
 		screenH = window.innerHeight;
 		$("#modalContainer").css({"height": screenH + "px", "display": "block"});
 
@@ -27,7 +44,7 @@ $(document).ready(function () {
 	});
 
 	// hide the modal search page when exiting
-	$("#modalExit").click(event => {
+	$("#modalExit").click(() => {
 		$("#modalContainer").css("display", "none");
 		$("body").css("position", "initial");
 	});
@@ -62,6 +79,8 @@ function getEvents(obj) {
 		console.log(fObj[fks[i]]);
 	}*/
 
+	// createTabHTML(obj)
+
 	// the html doesn't need to be created with the javascript, but it's easier for me. Someone should convince me
 	// of some other way that makes more sense. Here, we start with blank
 	let html = "";
@@ -86,18 +105,20 @@ function getEvents(obj) {
 	}
 
 	// now we put the html inside of a pre-existing html element with the id #content
-	$("#events").html(html);
+	tabs["Home"] = html;
+	content.html(html);
 
 	// get the url for more details about the first earthquake event
 	let detURL = fObj[fks[0]]["properties"]["detail"];
 
-	// now use the detURL to make another api request
+	// will use the detURL to make another api request
 	
 }
 
 function getEventDets(obj) {
 	// just logging it to the console for now :)
 	console.log(obj);
+
 }
 
 // this is the function that the buttons use. When the buttons were created, each one was given a unique argument,
@@ -112,5 +133,44 @@ function showDets(i) {
 		success: getEventDets		// this is the callback function used when the request is successful
 	});
 
-	$("#content").html("<p>" + dets[i] + "</p>");
+}
+
+function createTabHTML(obj) {
+	// obj["features"] is the object of the 50 earthquakes, and its keys are the details of each earthquake
+	// fObj is featureObjects; fks is featureKeys
+	let fObj = obj["features"];
+	let fks = Object.keys(fObj);
+
+	// Home tab HTML
+	let html = "";
+
+	// for every earthquake (fObj[fks[i]]) item:
+	for (let i = 0; i < fks.length; ++i) {
+		// make a new date object using the time integer in the ["properties"]["time"] of each earthquake
+		let d = new Date(parseInt(fObj[fks[i]]["properties"]["time"]));
+
+		// add to the html. each earthquake is a paragraph tag. It's retrieving magnitude, and place, then
+		// puts the date we got above into the html.
+		html += "<div class='cardContainer'>";
+		html += "<div class='bg'></div>";
+		html += "<div class='magnitude'><span>" + fObj[fks[i]]["properties"]["mag"] + "</span></div>";
+		html += "<div class='where'><span>" + fObj[fks[i]]["properties"]["place"] + "</span></div>";
+		html += "<div class='when'><span>" + d.toUTCString() + "</span></div>";
+		html += "<button class='btn' type='button' onclick='showDets(" + i + ")'>Details</button>";
+		html += "</div>";
+
+		// push the details url into the array declared in the ready function above
+		dets.push(fObj[fks[i]]["properties"]["detail"]);
+	}
+	// store the html in the global tabs object
+	tabs["Home"] = html;
+
+	// Timeline HTML
+	html = "";
+	// TODO make the rest of this
+}
+
+function changeContent(tabName) {
+	content.empty();
+	content.html(tabs[tabName]);
 }
