@@ -21,16 +21,15 @@ $(document).ready(function () {
 	// display search modal page
 	$("#searchIcon").click(event => {
 		screenH = window.innerHeight;
-		$("#modalContainer").css("height", screenH + "px");
+		$("#modalContainer").css({"height": screenH + "px", "display": "block"});
 
-		$("#modalContainer").css("display", "block");
-		$("body").css("overflow", "hidden");
+		$("body").css("position", "fixed");
 	});
 
 	// hide the modal search page when exiting
 	$("#modalExit").click(event => {
 		$("#modalContainer").css("display", "none");
-		$("body").css("overflow", "visible");
+		$("body").css("position", "initial");
 	});
 	
 	// request to the api for information using the base url above plus the query url.

@@ -7,6 +7,7 @@ html, body {
 }
 body {
 	position: relative;
+	width: 100%;
 }
 
 * {
@@ -38,11 +39,16 @@ body {
 	color: white;
 }
 #modalExit {
-	position: sticky;
-	top: 0;
+	/* position: sticky;
+	top: 0; */
 	display: inline-block;
 	color: white;
 	font-size: 20pt;
+	padding: 8px;
+}
+#modalExit:hover {
+	cursor: pointer;
+	background: rgba(255, 255, 255, 0.5);
 }
 fieldset {
 	width: 100%;
