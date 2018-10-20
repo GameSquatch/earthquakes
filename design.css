@@ -251,6 +251,7 @@ a:link, a:visited, a:active {
 /* 	grid-template-columns: 1fr; */
 	grid-gap: 30px;
 	justify-items: center;
+	height: 100%;
 }
 
 .cardContainer {

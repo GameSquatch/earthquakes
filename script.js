@@ -48,10 +48,16 @@ $(document).ready(function () {
 
 	// Selecting tab, adding class
 	$("#tabs").children().click((event) => {
-		$("#tabs").children().removeClass("currentTab");
-		$(event.target).addClass("currentTab");
-		currentTab = event.target.innerHTML;
-		changeContent(currentTab);
+		// TODO add check to see if clicked same tab that you are already on
+		if ($(event.target).hasClass("currentTab")) {
+			$("html").scrollTop(0);
+		}
+		else {
+			$("#tabs").children().removeClass("currentTab");
+			$(event.target).addClass("currentTab");
+			currentTab = event.target.innerHTML;
+			changeContent(currentTab);
+		}
 	});
 
 	// display search modal page
