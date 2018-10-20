@@ -5,6 +5,7 @@ let tabs;
 let currentTab;
 let content;
 let screenH;
+let loaderCont, loader, loadBox1;
 
 $(document).ready(function () {
 	// the detail url for each earthquake event
@@ -22,10 +23,28 @@ $(document).ready(function () {
 	currentTab = "Home";
 
 	content = $("#content");
+	loaderCont = $("#loaderContainer");
+	loader = $("#loader");
+	loadBox1 = $("#ldBx1");
+
+	let loaderW = parseInt(loader.css("width"));
+	loader.css("height", loaderW + "px");
+
+	let loadBox1W = parseInt(loadBox1.css("width"));
+	$(".loadBox").css("height", loadBox1W + "px");
 
 	// The modal should be the screen's height, so it's set to that here
 	screenH = window.innerHeight;
 	$("#modalContainer").css("height", screenH + "px");
+
+	// adjusting loader heights when resizing the window
+	$(window).on("resize", () => {
+		let loaderW = parseInt(loader.css("width"));
+		loader.css("height", loaderW + "px");
+
+		let loadBox1W = parseInt(loadBox1.css("width"));
+		$(".loadBox").css("height", loadBox1W + "px");
+	})
 
 	// Selecting tab, adding class
 	$("#tabs").children().click((event) => {
@@ -63,6 +82,9 @@ $(document).ready(function () {
 // our function used for the success of the api request. The information returned from the request is
 // used as an argument for the callback function. Since we requested json, it's a json object.
 function getEvents(obj) {
+
+	// hide the loader when content is loaded
+	loaderCont.css("display", "none");
 
 	// logging the object to the console, so you can see what it's comprised of
 	console.log(obj);
