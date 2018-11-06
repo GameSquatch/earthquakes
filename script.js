@@ -5,7 +5,11 @@ let tabs;
 let currentTab;
 let content;
 let screenH;
-let loaderCont, loader, loadBox1;
+let modalCont;
+let loaderCont, loader, loadBox1, loaderHTML;
+let detailModalCont, detailsHTML;
+
+
 
 $(document).ready(function () {
 	// the detail url for each earthquake event
@@ -21,8 +25,22 @@ $(document).ready(function () {
 		"About": ""
 	};
 	currentTab = "Home";
-
+	
 	content = $("#content");
+	modalCont = $("#modalContainer");
+	detailModalCont = $("#detailModalContainer");
+
+	// create loader html since the #content div's html will be overwritten when tabbing
+	loaderHTML = 	'<div id="loaderContainer">' + 
+						'<div id="loader">' + 
+							'<div id="ldBx1" class="loadBox"></div>' + 
+							'<div id="ldBx2" class="loadBox"></div>' + 
+							'<div id="ldBx3" class="loadBox"></div>' + 
+						'</div>' + 
+					'</div>';
+	content.append(loaderHTML);//append it to the DOM in #content
+
+	// these MUST be defined after the html strings are appended in order to access them in the DOM.
 	loaderCont = $("#loaderContainer");
 	loader = $("#loader");
 	loadBox1 = $("#ldBx1");
@@ -34,8 +52,9 @@ $(document).ready(function () {
 	$(".loadBox").css("height", loadBox1W + "px");
 
 	// The modal should be the screen's height, so it's set to that here
-	screenH = window.innerHeight;
-	$("#modalContainer").css("height", screenH + "px");
+	screenH = parseInt(window.innerHeight);
+	modalCont.css("height", screenH + "px");
+	detailModalCont.css("height", screenH + "px");
 
 	// adjusting loader heights when resizing the window
 	$(window).on("resize", () => {
@@ -51,6 +70,7 @@ $(document).ready(function () {
 		// TODO add check to see if clicked same tab that you are already on
 		if ($(event.target).hasClass("currentTab")) {
 			$("html").scrollTop(0);
+			$("body").scrollTop(0);
 		}
 		else {
 			$("#tabs").children().removeClass("currentTab");
@@ -62,15 +82,15 @@ $(document).ready(function () {
 
 	// display search modal page
 	$("#searchIcon").click(() => {
-		screenH = window.innerHeight;
-		$("#modalContainer").css({"height": screenH + "px", "display": "block"});
+		screenH = parseInt(window.innerHeight);
+		modalCont.css({"height": screenH + "px", "display": "block"});
 
 		$("body").css("position", "fixed");
 	});
 
 	// hide the modal search page when exiting
 	$("#modalExit").click(() => {
-		$("#modalContainer").css("display", "none");
+		modalCont.css("display", "none");
 		$("body").css("position", "initial");
 	});
 	
@@ -143,17 +163,13 @@ function getEvents(obj) {
 	
 }
 
-function getEventDets(obj) {
-	// just logging it to the console for now :)
-	console.log(obj);
-
-}
-
 // this is the function that the buttons use. When the buttons were created, each one was given a unique argument,
 // so this will get the details from the array using that unique index. The details array was created using the same index.
-function showDets(i) {
+function showDets(i) {// !!! DEFINED IN HTML CREATED IN THE getEvents() FUNCTION ABOVE !!!
 	let u = dets[i];
 
+	detailModalCont.css("display", "block");
+	// send another request using the url obtained in the events request
 	$.ajax({
 		type: "GET",				// it's getting information
 		url: u,				// combining the url's to make a valid url
@@ -161,6 +177,11 @@ function showDets(i) {
 		success: getEventDets		// this is the callback function used when the request is successful
 	});
 
+}
+// the function when requesting details from the api succeeds
+function getEventDets(obj) {
+	// just logging it to the console for now :)
+	console.log(obj);
 }
 
 function createTabHTML(obj) {
@@ -199,6 +220,6 @@ function createTabHTML(obj) {
 }
 
 function changeContent(tabName) {
-	content.empty();
+	
 	content.html(tabs[tabName]);
 }

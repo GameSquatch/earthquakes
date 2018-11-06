@@ -1,9 +1,14 @@
 :root {
 	--cardBorder: 5px solid #207cca;
+    --tabColor: green;
+    --headerColor: black;
 }
 
 html, body {
 	margin: 0;
+}
+html {
+	height: 100%;
 }
 body {
 	position: relative;
@@ -81,6 +86,29 @@ button.search {
 *  END MODAL DESIGN ************
 ********************************/
 
+/* *****************************
+*  DETAIL MODAL DESIGN *********
+*/
+#detailModalContainer {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 3;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.65);
+	padding: 10px 0;
+}
+#detailModal {
+	width: calc(100% - 20px);
+	max-width: 650px;
+	margin: auto;
+	border-radius: 25px;
+	background: white;
+}
+/* *****************************
+*  END DETAIL MODAL DESIGN *****
+*/
 
 /* *****************************
 *  LOADER DESIGN ***************
@@ -161,7 +189,7 @@ button.search {
 */
 #topHeader, #header, #tabs {
 	margin: 0;
-	background: #000;
+	background: var(--headerColor);
 	color: white;
 	width: 100%;
 	display: grid;
@@ -182,13 +210,13 @@ button.search {
 	top: 0;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-template-rows: 50px;
-	background: green;
+	background: var(--tabColor);
 }
 
 .headerIcon {
 	display: grid;
 	place-items: center;
-	background: #000;
+	background: var(--headerColor);
 	border-radius: 50%;
 	color: white;
 	font-size: 20pt;
@@ -244,14 +272,14 @@ a:link, a:visited, a:active {
 /* *****************************
 *  CONTENT DESIGN **************
 */
-.contentContainer {
+#content {
 	margin-top: 20px;
 	display: grid;
 	width: 100%;
 /* 	grid-template-columns: 1fr; */
 	grid-gap: 30px;
 	justify-items: center;
-	height: 100%;
+	overflow: auto;
 }
 
 .cardContainer {
@@ -270,6 +298,7 @@ a:link, a:visited, a:active {
 		". . . . . . ."
 		". . btn btn btn . ."
 		". . btn btn btn . .";
+
 }
 
 .magnitude {

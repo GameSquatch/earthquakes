@@ -9,13 +9,14 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="design.css">
     <script src="script.js"></script>
+    <link rel="stylesheet" href="design.css">
 </head>
 <body>
 
     <div id="modalContainer">
         <div id="searchModal">
+
             <div id="modalExit">X</div>
             <fieldset>
                 <legend>Location</legend>
@@ -58,6 +59,15 @@
         </div>
     </div>
 
+    <div id="detailModalContainer">
+        <div id="detailModal">
+
+            <div id="detailHeader">DETAILS</div>
+            <div id="detailDepth">100<span id="depthUnit">km</span></div>
+
+        </div>
+    </div>
+
     <div id="topHeader">
         <div class="headerIcon"><a class="fab fa-twitter"></a></div>
         <div class="headerIcon"><a class="fab fa-instagram"></a></div>
@@ -77,13 +87,7 @@
     
     <div id="content" class="contentContainer">
 
-        <div id="loaderContainer">
-            <div id="loader">
-                <div id="ldBx1" class="loadBox"></div>
-                <div id="ldBx2" class="loadBox"></div>
-                <div id="ldBx3" class="loadBox"></div>
-            </div>
-        </div>
+        <!-- All content to start is appended here using javascript on load-->
         
     </div>
     
