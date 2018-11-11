@@ -100,11 +100,55 @@ button.search {
 	padding: 10px 0;
 }
 #detailModal {
+	position: relative;
 	width: calc(100% - 20px);
 	max-width: 650px;
 	margin: auto;
 	border-radius: 25px;
 	background: white;
+	/* padding: 15px; */
+}
+#detailExit {
+	display: grid;
+	place-items: center;
+	position: relative;
+	float: right;
+	border-radius: 0 25px 0 0;
+	height: 100%;
+	width: 45px;
+}
+#detailExit:hover {
+	cursor: pointer;
+	background: rgb(0, 163, 0);
+}
+#detailHeader {
+	background: var(--tabColor);
+	color: white;
+	border-radius: 25px 25px 0 0;
+	height: 45px;
+}
+#detailHeaderText {
+	position: relative;
+	float: left;
+	display: grid;
+	place-items: center;
+	height: 100%;
+	padding:  0 10px;
+}
+#detailContent {
+	border-left: 3px solid #207cca;
+	border-bottom: 3px solid #207cca;
+	border-right: 3px solid #207cca;
+	border-radius: 0 0 25px 25px;
+}
+#detailContent div:nth-child(odd) {
+	background: rgb(246, 246, 246);
+}
+#detailContent div:last-child {
+	border-radius: 0 0 25px 25px;
+}
+#detailContent div {
+	padding: 18px;
 }
 /* *****************************
 *  END DETAIL MODAL DESIGN *****
@@ -187,9 +231,12 @@ button.search {
 /* *****************************
 *  HEADER DESIGN ***************
 */
+#headerBackground {
+	width: 100%;
+	background: linear-gradient(to bottom right, #1a1a1a, #666666);
+}
 #topHeader, #header, #tabs {
 	margin: 0;
-	background: var(--headerColor);
 	color: white;
 	width: 100%;
 	display: grid;
@@ -216,7 +263,6 @@ button.search {
 .headerIcon {
 	display: grid;
 	place-items: center;
-	background: var(--headerColor);
 	border-radius: 50%;
 	color: white;
 	font-size: 20pt;

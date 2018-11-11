@@ -1,20 +1,18 @@
 let baseURL = "https://earthquake.usgs.gov/fdsnws/event/1";
 let queryURL = "/query?format=geojson&minmagnitude=4.5&limit=15&includeallmagnitudes";
-let dets;
 let tabs;
+let events;
 let currentTab;
 let content;
 let screenH;
 let modalCont;
 let loaderCont, loader, loadBox1, loaderHTML;
-let detailModalCont, detailsHTML;
+let detailModalCont, detailMag, detailDepth, detailIntensity, detailLat, detailLong, detailPlace, detailTsu, detailExit;
 
 
 
 $(document).ready(function () {
-	// the detail url for each earthquake event
-	dets = [];
-
+	events = [];
 	// this object will contain the tab content. Instead of loading a whole new page, I am just going to create the html
 	// needed for each tab. This is for a very specific reason. The website www.sololearn.com can't use multiple pages,
 	// and that's where I post a lot of my projects.
@@ -28,7 +26,16 @@ $(document).ready(function () {
 	
 	content = $("#content");
 	modalCont = $("#modalContainer");
+	// all detail DOM elements
 	detailModalCont = $("#detailModalContainer");
+	detailMag = $("#detailMagnitude");
+	detailDepth = $("#detailDepth");
+	detailIntensity = $("#detailIntensity");
+	detailLat = $("#detailLatitude");
+	detailLong = $("#detailLongitude");
+	detailPlace = $("#detailPlace");
+	detailTsu = $("#detailTsunami");
+	detailExit = $("#detailExit");
 
 	// create loader html since the #content div's html will be overwritten when tabbing
 	loaderHTML = 	'<div id="loaderContainer">' + 
@@ -83,15 +90,20 @@ $(document).ready(function () {
 	// display search modal page
 	$("#searchIcon").click(() => {
 		screenH = parseInt(window.innerHeight);
-		modalCont.css({"height": screenH + "px", "display": "block"});
+		modalCont.css({"height": screenH + "px", "display": "block", "position": "fixed"});
 
 		$("body").css("position", "fixed");
 	});
 
 	// hide the modal search page when exiting
 	$("#modalExit").click(() => {
-		modalCont.css("display", "none");
+		modalCont.css({"display": "none", "position": "fixed"});
 		$("body").css("position", "initial");
+	});
+
+	// hide the detail modal
+	detailExit.click(() => {
+		detailModalCont.css("display", "none");
 	});
 	
 	// request to the api for information using the base url above plus the query url.
@@ -135,9 +147,12 @@ function getEvents(obj) {
 
 	// for every earthquake (fObj[fks[i]]) item:
 	for (let i = 0; i < fks.length; ++i) {
+		// push each event into an array to access at any point in the app, like for details, for example
+		events.push(fObj[fks[i]]);
+
 		// make a new date object using the time integer in the ["properties"]["time"] of each earthquake
 		let d = new Date(parseInt(fObj[fks[i]]["properties"]["time"]));
-
+		
 		// add to the html. each earthquake is a paragraph tag. It's retrieving magnitude, and place, then
 		// puts the date we got above into the html.
 		html += "<div class='cardContainer'>";
@@ -148,34 +163,39 @@ function getEvents(obj) {
 		html += "<button class='btn' type='button' onclick='showDets(" + i + ")'>Details</button>";
 		html += "</div>";
 
-		// push the details url into the array declared in the ready function above
-		dets.push(fObj[fks[i]]["properties"]["detail"]);
 	}
 
 	// now we put the html inside of a pre-existing html element with the id #content
 	tabs["Home"] = html;
 	content.html(html);
-
-	// get the url for more details about the first earthquake event
-	let detURL = fObj[fks[0]]["properties"]["detail"];
-
-	// will use the detURL to make another api request
 	
 }
 
 // this is the function that the buttons use. When the buttons were created, each one was given a unique argument,
 // so this will get the details from the array using that unique index. The details array was created using the same index.
 function showDets(i) {// !!! DEFINED IN HTML CREATED IN THE getEvents() FUNCTION ABOVE !!!
-	let u = dets[i];
+	// fill the detail modal with the info of the event that was clicked, i
+	let eventProps = events[i]["properties"];
+	
+	detailMag.html("<strong>Magnitude:</strong> " + eventProps["mag"]);
+	detailDepth.html("<strong>Depth:</strong> " + events[i]["geometry"]["coordinates"][2]);
+	eventProps["cdi"] == "" ? detailIntensity.html("<strong>Reported Intensity:</strong> " + eventProps["cdi"]) : detailIntensity.html("No reports of a felt earthquake.");
+	detailLat.html("<strong>Latitude:</strong> " + events[i]["geometry"]["coordinates"][1]);
+	detailLong.html("<strong>Longitude:</strong> " + events[i]["geometry"]["coordinates"][0]);
+	detailPlace.html("<strong>Place:</strong> " + eventProps["place"]);
+	detailTsu.html("<strong>Tsunami Flag:</strong> " + eventProps["tsunami"]);
 
-	detailModalCont.css("display", "block");
+	// show the detail modal block
+	detailModalCont.css({"height": screenH + "px", "display": "block", "position": "fixed"});
+
 	// send another request using the url obtained in the events request
-	$.ajax({
-		type: "GET",				// it's getting information
-		url: u,				// combining the url's to make a valid url
-		dataType: "json",			// it's requesting info in json format
-		success: getEventDets		// this is the callback function used when the request is successful
-	});
+	// MAY NOT BE NECESSARY AT FIRST
+	// $.ajax({
+	// 	type: "GET",				// it's getting information
+	// 	url: u,				// combining the url's to make a valid url
+	// 	dataType: "json",			// it's requesting info in json format
+	// 	success: getEventDets		// this is the callback function used when the request is successful
+	// });
 
 }
 // the function when requesting details from the api succeeds
