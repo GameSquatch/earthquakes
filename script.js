@@ -134,7 +134,7 @@ function getEvents(obj) {
 		content.html("<div>No events exist with those search parameters. Please try again.</div>");
 	} else {
 		let fks = Object.keys(fObj);
-
+		events = [];
 		// to display info from a json, you use the keys to get that info, so fks[i] is a key of fObj
 		// fObj[key] is the value (or info) in that key, value pair.
 		// In this case, the values are json objects of each earthquake. Logging them to the console.

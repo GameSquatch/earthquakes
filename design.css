@@ -21,7 +21,7 @@ body {
 }
 
 /* *****************************
-*  MODAL DESIGN ****************
+*  SEARCH MODAL DESIGN *********
 */
 #modalContainer {
 	position: absolute;
@@ -76,6 +76,15 @@ input {
 	width: 100%;
 	padding: 8px 5px;
 	background: #DDD;
+	border: 2px solid green;
+	border-radius: 15px;
+	outline: none;
+	transition: all 0.2s ease-out;
+}
+input:focus {
+	padding: 12px 8px;
+	border-radius: 20px;
+	border: 2px solid #207cca;
 }
 select {
 	width: 100%;
@@ -92,7 +101,7 @@ button#search:hover {
 	cursor: pointer;
 }
 /*
-*  END MODAL DESIGN ************
+*  END SEARCH MODAL DESIGN *****
 ********************************/
 
 /* *****************************
