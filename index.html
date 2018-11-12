@@ -18,28 +18,52 @@
         <div id="searchModal">
 
             <div id="modalExit">X</div>
+
+            <fieldset>
+                <legend>Magnitude &amp; Depth</legend>
+                <div class="inputName">Minimum Magnitude</div>
+                <input type="number" placeholder="4.5">
+                <div class="inputDescription">This will search for earthquakes with magnitudes above what you type in here. If empty, this defaults to null.</div>
+                <div class="inputSpacer"></div>
+                <div class="inputName">Maximum Magnitude</div>
+                <input type="number" placeholder="4.5">
+                <div class="inputDescription">This will search for earthquakes with magnitudes below what you type in here. If empty, this defaults to null.</div>
+                <div class="inputSpacer"></div>
+                <div class="inputName">Minimum Depth</div>
+                <input type="number" placeholder="4.5">
+                <div class="inputDescription">This will search for earthquakes with epicenter depths above what you type in here. If empty, this defaults to 1,000 km.</div>
+                <div class="inputSpacer"></div>
+                <div class="inputName">Maximum Depth</div>
+                <input type="number" placeholder="4.5">
+                <div class="inputDescription">This will search for earthquakes with epicenter depths below what you type in here. If empty, this defaults to -100 km (earthquakes can happen above sea level).</div>
+                <div class="inputSpacer"></div>
+                <div class="inputDescription">Using both max and min for either depth or magnitude will search for earthquakes with values in between what you search for.</div>
+            </fieldset>
+
             <fieldset>
                 <legend>Location</legend>
                 <div class="inputName">Latitude</div>
-                <input id="lat" type="number" placeholder="70.04">
-                <div class="inputDescription">Latitude ranges from -90 to 90 degrees.</div>
+                <input type="number" placeholder="70.04">
+                <div class="inputDescription">Latitude ranges from -90 to 90 degrees South and North of the equator respectively. If empty, this will default to null.</div>
                 <div class="inputSpacer"></div>
                 <div class="inputName">Longitude</div>
-                <input id="long" type="number" placeholder="100.05">
-                <div class="inputDescription">Longitude ranges from -180 degrees to 180 degrees.</div>
+                <input type="number" placeholder="100.05">
+                <div class="inputDescription">Longitude ranges from -180 degrees to 180 degrees East and West of the meridian respectively. If empty, this will default to null.</div>
                 <div class="inputSpacer"></div>
-                <div class="inputName">Radius</div>
-                <input id="rad" type="number" placeholder="150">
-                <div class="inputDescription">Radius is the distance from the latitude-longitude point defined above. So 50 will cover an area of a circle with a radius of 50km.</div>
+                <div class="inputName">Max Radius</div>
+                <input type="number" placeholder="150">
+                <div class="inputDescription">Radius is the distance from the latitude-longitude point defined above. So 50 will cover an area of a circle with a radius of 50 km. If empty, this will default to 20,001.6 km, or cover the whole earth.</div>
             </fieldset>
             
             <fieldset>
                 <legend>Date</legend>
                 <div class="inputName">Start Date</div>
                 <input type="date">
+                <div class="inputDescription">If empty, this will default to 30 days ago from now.</div>
                 <div class="inputSpacer"></div>
                 <div class="inputName">End Date</div>
                 <input type="date">
+                <div class="inputDescription">If empty, this will default to present time (now).</div>
             </fieldset>
             
             <fieldset>
@@ -54,7 +78,7 @@
                 <div class="inputDescription">The results of the search will sort by this parameter.</div>
             </fieldset>
             
-            <button class="search" type="button" onclick="search()">Search</button>
+            <button id="search" type="button" onclick="search()">Search</button>
             
         </div>
     </div>

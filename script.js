@@ -45,7 +45,7 @@ $(document).ready(function () {
 							'<div id="ldBx3" class="loadBox"></div>' + 
 						'</div>' + 
 					'</div>';
-	content.append(loaderHTML);//append it to the DOM in #content
+	$("body").append(loaderHTML);//append it to the DOM in #content
 
 	// these MUST be defined after the html strings are appended in order to access them in the DOM.
 	loaderCont = $("#loaderContainer");
@@ -130,44 +130,48 @@ function getEvents(obj) {
 	// obj["features"] is the object of the 50 earthquakes, and its keys are the details of each earthquake
 	// fObj is featureObjects; fks is featureKeys
 	let fObj = obj["features"];
-	let fks = Object.keys(fObj);
+	if (fObj.length == 0) {
+		content.html("<div>No events exist with those search parameters. Please try again.</div>");
+	} else {
+		let fks = Object.keys(fObj);
 
-	// to display info from a json, you use the keys to get that info, so fks[i] is a key of fObj
-	// fObj[key] is the value (or info) in that key, value pair.
-	// In this case, the values are json objects of each earthquake. Logging them to the console.
-	/*for (let i = 0; i < fks.length; ++i) {
-		console.log(fObj[fks[i]]);
-	}*/
+		// to display info from a json, you use the keys to get that info, so fks[i] is a key of fObj
+		// fObj[key] is the value (or info) in that key, value pair.
+		// In this case, the values are json objects of each earthquake. Logging them to the console.
+		/*for (let i = 0; i < fks.length; ++i) {
+			console.log(fObj[fks[i]]);
+		}*/
 
-	// createTabHTML(obj)
+		// createTabHTML(obj)
 
-	// the html doesn't need to be created with the javascript, but it's easier for me. Someone should convince me
-	// of some other way that makes more sense. Here, we start with blank
-	let html = "";
+		// the html doesn't need to be created with the javascript, but it's easier for me. Someone should convince me
+		// of some other way that makes more sense. Here, we start with blank
+		let html = "";
 
-	// for every earthquake (fObj[fks[i]]) item:
-	for (let i = 0; i < fks.length; ++i) {
-		// push each event into an array to access at any point in the app, like for details, for example
-		events.push(fObj[fks[i]]);
+		// for every earthquake (fObj[fks[i]]) item:
+		for (let i = 0; i < fks.length; ++i) {
+			// push each event into an array to access at any point in the app, like for details, for example
+			events.push(fObj[fks[i]]);
 
-		// make a new date object using the time integer in the ["properties"]["time"] of each earthquake
-		let d = new Date(parseInt(fObj[fks[i]]["properties"]["time"]));
-		
-		// add to the html. each earthquake is a paragraph tag. It's retrieving magnitude, and place, then
-		// puts the date we got above into the html.
-		html += "<div class='cardContainer'>";
-		html += "<div class='bg'></div>";
-		html += "<div class='magnitude'><span>" + fObj[fks[i]]["properties"]["mag"] + "</span></div>";
-		html += "<div class='where'><span>" + fObj[fks[i]]["properties"]["place"] + "</span></div>";
-		html += "<div class='when'><span>" + d.toUTCString() + "</span></div>";
-		html += "<button class='btn' type='button' onclick='showDets(" + i + ")'>Details</button>";
-		html += "</div>";
+			// make a new date object using the time integer in the ["properties"]["time"] of each earthquake
+			let d = new Date(parseInt(fObj[fks[i]]["properties"]["time"]));
+			
+			// add to the html. each earthquake is a paragraph tag. It's retrieving magnitude, and place, then
+			// puts the date we got above into the html.
+			html += "<div class='cardContainer'>";
+			html += "<div class='bg'></div>";
+			html += "<div class='magnitude'><span>" + fObj[fks[i]]["properties"]["mag"] + "</span></div>";
+			html += "<div class='where'><span>" + fObj[fks[i]]["properties"]["place"] + "</span></div>";
+			html += "<div class='when'><span>" + d.toUTCString() + "</span></div>";
+			html += "<button class='btn' type='button' onclick='showDets(" + i + ")'>Details</button>";
+			html += "</div>";
 
+		}
+
+		// now we put the html inside of a pre-existing html element with the id #content
+		tabs["Home"] = html;
+		content.html(html);
 	}
-
-	// now we put the html inside of a pre-existing html element with the id #content
-	tabs["Home"] = html;
-	content.html(html);
 	
 }
 
@@ -242,4 +246,34 @@ function createTabHTML(obj) {
 function changeContent(tabName) {
 	
 	content.html(tabs[tabName]);
+}
+
+function search() {
+	queryURL = "/query?format=geojson";
+	let queryStrings = ["minmagnitude", "maxmagnitude", "mindepth", "maxdepth", "latitude", "longitude", "maxradiuskm", "starttime", "endtime"];
+	let inputs = $("#searchModal input");
+	let sortMethod = $("#orderby");
+	let allEmpty = true;
+	for (let i = 0; i < inputs.length; ++i) {
+		inputValue = $(inputs[i]).val();
+		if (inputValue != "") {
+			allEmpty = false;
+			queryURL += "&" + queryStrings[i] + "=" + inputValue;
+		}
+	}
+
+	if (!allEmpty) {
+		queryURL += "&limit=15&orderby=" + sortMethod.val();
+		modalCont.css({"display": "none", "position": "fixed"});
+		$("body").css("position", "initial");
+		content.html("");
+		loaderCont.css("display", "block");
+		console.log(queryURL);
+		$.ajax({
+			type: "GET",				// it's getting information
+			url: baseURL + queryURL,	// combining the url's to make a valid url
+			dataType: "json",			// it's requesting info in json format
+			success: getEvents			// this is the callback function used when the request is successful
+		});
+	}
 }
